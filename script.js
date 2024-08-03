@@ -71,7 +71,7 @@ button.addEventListener("click", () => {
             }
             else if(isPrivate){
                 accountStatus.textContent = "This user is private :( , but here are some public things about him";
-                accountStatus.style.backgroundColor = '#8d8d40';
+                accountStatus.style.backgroundColor = '#ffff0042';
                 accountName.textContent = `Full name : ${fullName}`;
                 accountBio.textContent = `Bio : ${bio}`;
                 accountDate.textContent = `Joined : ${date}`;
@@ -108,7 +108,7 @@ button.addEventListener("click", () => {
                     storiesText.textContent = "This user has no stories currently";
                 }
             }
-        } 
+        }
         catch (e) {
             console.error(e);
             accountStatus.textContent = "Something went wrong";

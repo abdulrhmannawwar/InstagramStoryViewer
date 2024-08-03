@@ -2,10 +2,15 @@
 body{
     min-height: 100vh;
     color : white;
-    background-image: linear-gradient(77deg, rgba(32, 2, 133, 0.2),rgba(241, 62, 151, 0.2)),
-    linear-gradient(152deg, rgb(246, 112, 73) 0%,
-    rgb(230, 71, 141) 11%,rgb(206, 9, 242) 48%,rgb(254, 132, 39) 50%,rgb(238, 91, 107) 61%,
-    rgb(214, 30, 208) 88%,rgb(222, 50, 174) 100%);
+    background-image: linear-gradient(
+    310deg,
+    #ffd500 0%,
+    #ff9100 13%,
+    #ff4d4f 32%,
+    #f00094 54%,
+    #c619d2 77%,
+    #7538fa 100%
+    );
 }
 a{
     color : black;
@@ -19,7 +24,7 @@ body,input,button{
 .container{
     width: 500px;
     margin: 30px auto;
-    background-color: #800080ae;
+    background-color: #00000021;
     border-radius: 15px;
     text-align: center;
     padding: 0 10px 10px;
@@ -41,32 +46,43 @@ body,input,button{
     outline: none;
     border: 1px solid purple;
     margin-right: 20px;
-    background-color: rgba(119, 6, 119, 0.93);
+    background-color:transparent;
     border-radius: 20px;
     color : white;
 }
+.inputContainer input:focus{
+    background-color: #e0a5e060;
+}
+/* 
+#ffd600
+#ff7a00
+#ff0069
+#d300c5
+#7638fa
+ */
 .inputContainer button{
     padding: 10px 30px;
     border: 1px solid purple;
     color : white;
     cursor: pointer;
     border-radius: 25px;
-    background-color: purple;
+    background-color: transparent; 
     transition: .3s;
 }
 .inputContainer button:hover{
-    background-color: rgb(201, 10, 201);
+    background-color: #e0a5e060;
 }
 .fa-brands{
     margin-right: 10px;
     font-size: 44px;
-    color : rgb(210, 2, 210);
+    color : #ffffff9d;
 }
 .status{
-    margin-top: 0;
+    margin: 0;
     font-size: 32px;
-    margin-bottom: 0;
     border-radius: 10px;
+    padding: 5px;
+    line-height: 1.2;
 }
 .account{
     margin-top: 0;
