@@ -2,124 +2,98 @@ let input = document.getElementById("input");
 let button = document.querySelector("button");
 
 let container = document.querySelector(".container");
-let accountStatus = document.querySelector(".status");
-let accountName = document.querySelector(".accountName");
-let accountBio = document.querySelector(".accountBio");
-let accountPicText = document.querySelector(".accountPicText");
-let accountImg = document.querySelector(".accountImg");
-let storiesText = document.querySelector(".stories");
-let accountDate = document.querySelector(".accountDate");
+let userContainer = document.querySelector(".userContainer");
+let userPfp = document.querySelector("#userPfp");
+let postsNumber = document.querySelector(".postsCount");
+let followersNumber = document.querySelector(".followersCount");
+let followingNumber = document.querySelector(".followingCount");
+let fullName = document.querySelector(".fullName");
+let bio = document.querySelector(".bio");
+let joinDate = document.querySelector(".joinDate");
+let placeHolder = document.querySelector(".PlaceHolder");
+let storiesStatues = document.querySelector(".storiesStatues");
+let storiesContainer = document.querySelector(".storiesContainer");
+async function getUserData(userName) {
 
-button.addEventListener("click", () => {
-    let user = input.value;
-    if(!user) {
-        accountStatus.textContent = 'You must enter a username first lol';
-        accountImg.style.display = 'none';
-        accountStatus.style.backgroundColor = '';
-        accountName.textContent = "";
-        accountBio.textContent = "";
-        accountDate.textContent = "";
-        accountPicText.textContent = "";
-        storiesText.textContent = "";
-        document.querySelectorAll('.storyImg').forEach(img => {
-            img.remove();
-        });
-        return;
-    }
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '24f347ef6bmsh21529e8581ca6bap1cb0aejsnaa0c38a1de64',
+            'x-rapidapi-key': '1d002c00f3mshb1bdb90ccaad5dap1f45e6jsn0f39d57284bb',
             'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com'
         }
     };
 
-    async function getUserData() {
-        let AccountInfo = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${user}&include_about=true&url_embed_safe=true`;
-        let story = `https://instagram-scraper-api2.p.rapidapi.com/v1/stories?username_or_id_or_url=${user}&url_embed_safe=true`;
-        try {
-            document.querySelectorAll('.storyImg').forEach(img => {
-                img.remove();
-            });
-            accountStatus.textContent = 'Searching...';
-            accountName.textContent = "";
-            accountBio.textContent = "";
-            accountDate.textContent = "";
-            accountPicText.textContent = "";
-            storiesText.textContent = "";
-            accountStatus.style.backgroundColor = '';
-            accountImg.style.display = 'none';
-            let accountResponse = await fetch(AccountInfo, options);
-            let accountResult = await accountResponse.json();
-            let accountData = accountResult.data;
-
-            let isPrivate = accountData.is_private;
-            let profilePic = accountData.profile_pic_url;
-            let fullName = accountData.full_name;
-            let bio = accountData.biography;
-            let date = accountData.about.date_joined;
-            
-            if(accountResponse.status==404){
-                accountStatus.textContent = "User does not exist :(";
-                accountStatus.style.backgroundColor = 'red';
-                accountName.textContent = "";
-                accountBio.textContent = "";
-                accountDate.textContent = "";
-                accountPicText.textContent = "";
-                accountImg.style.display = 'none';
-                storiesText.textContent = "";
-            }
-            else if(isPrivate){
-                accountStatus.textContent = "This user is private :( , but here are some public things about him";
-                accountStatus.style.backgroundColor = '#ffff0042';
-                accountName.textContent = `Full name : ${fullName}`;
-                accountBio.textContent = `Bio : ${bio}`;
-                accountDate.textContent = `Joined : ${date}`;
-                accountPicText.textContent = "Here's his picture";
-                accountImg.style.display = 'block';
-                accountImg.src = profilePic;
-                accountImg.className = "accountImg";
-            }
-            else{
-                accountStatus.textContent = "User found :)";
-                accountStatus.style.backgroundColor = 'green';
-                accountName.textContent = `Full name : ${fullName}`;
-                accountBio.textContent = `Bio : ${bio}`;
-                accountDate.textContent = `Joined : ${date}`;
-                accountPicText.textContent = "Here's his picture";
-                accountImg.src = profilePic;
-                accountImg.style.display = 'block';
-                accountImg.className = "accountImg";
-                storiesText.textContent = "Searching for stories...";
-
-                let storyResponse = await fetch(story, options);
-                let storyResult = await storyResponse.json();
-                let storyData = storyResult.data;
-                let storyLength = storyData.items.length;
-                if(storyLength){
-                    storiesText.textContent = "Here's his stories";
-                    for(let i=0 ; i < storyLength ; i++){
-                        let img = document.createElement('img');
-                        img.src = storyData.items[i].thumbnail_url;
-                        img.className = "storyImg";
-                        container.appendChild(img);
-                    };
-                } else{
-                    storiesText.textContent = "This user has no stories currently";
+    const infoUrl = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${userName}&include_about=true&url_embed_safe=true`;
+    const storiesUrl =`https://instagram-scraper-api2.p.rapidapi.com/v1/stories?username_or_id_or_url=${userName}&url_embed_safe=true`;
+    
+    try{
+        userContainer.style.display = "none";
+        placeHolder.textContent = 'searching...';
+        document.querySelectorAll('.story').forEach(story => {
+            story.remove();
+        });
+        storiesStatues.textContent = '';
+        let infoResponse = await fetch(infoUrl, options);
+        let infoData = await infoResponse.json();
+        infoData = infoData.data;
+        let full_name = infoData.full_name;
+        let bio_text = infoData.biography;
+        let joined_date = infoData.about.date_joined;
+        let posts_count = infoData.media_count;
+        let followers_count = infoData.follower_count;
+        let following_count = infoData.following_count;
+        let is_private = infoData.is_private;
+        let pfpLink = infoData.profile_pic_url;
+        console.log(full_name, bio_text, joined_date, posts_count, followers_count, following_count, is_private, pfpLink);
+        userContainer.style.display = "flex";
+        storiesContainer.style.display = "block";
+        placeHolder.textContent = '';
+        fullName.textContent = `Full Name : ${full_name}`;
+        bio.textContent = `Bio : ${bio_text}`;
+        joinDate.textContent = `Joined : ${joined_date}`;
+        postsNumber.textContent = posts_count;
+        followersNumber.textContent = followers_count;
+        followingNumber.textContent = following_count;
+        userPfp.src = pfpLink;
+        
+        if(is_private){
+            storiesStatues.textContent = 'This account is private';
+        } else{
+            storiesStatues.textContent = 'searching for stories...';
+            let storiesResponse = await fetch(storiesUrl, options);
+            let storiesData = await storiesResponse.json();
+            storiesData = storiesData.data;
+            let storiesCount = storiesData.count;
+            if(storiesCount){
+                storiesStatues.textContent = 'Stories : ';
+                for(let i = 0; i < storiesCount; i++){
+                    let story = document.createElement("img");
+                    story.src = storiesData.items[i].thumbnail_url;
+                    story.className = "story";
+                    storiesContainer.appendChild(story);
                 }
+            } else{
+                storiesStatues.textContent = 'This user has no stories currently';
             }
         }
-        catch (e) {
-            console.error(e);
-            accountStatus.textContent = "Something went wrong";
-            accountStatus.style.backgroundColor = 'red';
-            accountName.textContent = "";
-            accountBio.textContent = "";
-            accountDate.textContent = "";
-            accountPicText.textContent = "";
-            accountImg.style.display = 'none';
-            storiesText.textContent = "";
-        }
-    };
-    getUserData();
+    }
+    catch(e){
+        console.error(e);
+        placeHolder.textContent = 'Something went wrong :(';
+        storiesContainer.style.display = "none";
+        userContainer.style.display = "none";
+        document.querySelectorAll('.story').forEach(story => {
+            story.remove();
+        });
+    }
+}
+button.addEventListener("click", () => {
+    let userName = input.value;
+    if(!userName){
+        placeHolder.textContent = 'You must enter a username first lol';
+        userContainer.style.display = "none";
+        storiesContainer.style.display = "none";
+        return;
+    }
+    getUserData(userName);
 });

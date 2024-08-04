@@ -16,7 +16,7 @@ a{
     color : black;
 }
 body,input,button{
-    font-family: "Cairo", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 ::placeholder{
     color : rgba(255, 255, 255, 0.564);
@@ -28,6 +28,7 @@ body,input,button{
     border-radius: 15px;
     text-align: center;
     padding: 0 10px 10px;
+    display: f;
     box-shadow:  5px 5px 15px #00000080;
 }
 .inputContainer{
@@ -53,13 +54,6 @@ body,input,button{
 .inputContainer input:focus{
     background-color: #e0a5e060;
 }
-/* 
-#ffd600
-#ff7a00
-#ff0069
-#d300c5
-#7638fa
- */
 .inputContainer button{
     padding: 10px 30px;
     border: 1px solid purple;
@@ -77,34 +71,56 @@ body,input,button{
     font-size: 44px;
     color : #ffffff9d;
 }
-.status{
-    margin: 0;
-    font-size: 32px;
+.userContainer{
+    display: none;
+}
+
+.userAbout{
+    display: flex;
+    flex-direction: column;
+}
+#userPfp{
+    width : 250px;
+    height: 280px;
     border-radius: 10px;
-    padding: 5px;
-    line-height: 1.2;
 }
-.account{
-    margin-top: 0;
-    font-size: 20px;
+.userPosts{
+    display: flex;
+    justify-content: space-around;
+    height: fit-content;
+}
+.userPosts div{
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+.userPosts div > p:nth-child(2){
     margin: 0;
 }
-.stories{
-    margin-bottom: 0;
-    font-size: 32px;
+.fullName{
+    text-align: start;
+    margin: 20px;
 }
-.accountImg{
-    width : 300px;
-    height: 350px;
-    border-radius: 7px;
-    margin: 20px auto 0;
+.bio{
+    text-align: start;
+    margin: 0 20px;
 }
-.storyImg{
-    width : 300px;
-    height: 400px;
-    border-radius: 7px;
-    margin: 20px auto 0;
+.joinDate{
+    text-align: start;
+    margin: 20px;
 }
+.story{
+    margin: 10px 0 0;
+    width: 90%;
+}
+.storiesStatues{
+    font-size: 24px;
+}
+.PlaceHolder{
+    font-size: 22px;
+}
+
+
 @media (max-width: 800px){
     .container{
         width: 90%;
@@ -120,6 +136,15 @@ body,input,button{
         width: 200px;
     }
     ::placeholder{
+        font-size: 12px;
+    }
+    #userPfp{
+        height: 180px;
+    }
+    .userPosts div{
+        margin: 0 5px;
+    }
+    .userAbout{
         font-size: 12px;
     }
 }
