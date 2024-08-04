@@ -78,6 +78,7 @@ body,input,button{
 .userAbout{
     display: flex;
     flex-direction: column;
+    margin: -15px 0 0 0;
 }
 #userPfp{
     width : 250px;
@@ -146,5 +147,6 @@ body,input,button{
     }
     .userAbout{
         font-size: 12px;
+        margin: -10px 0 0 0;
     }
 }
