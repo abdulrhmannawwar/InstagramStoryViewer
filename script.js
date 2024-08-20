@@ -18,7 +18,7 @@ async function getUserData(userName) {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '1d002c00f3mshb1bdb90ccaad5dap1f45e6jsn0f39d57284bb',
+            'x-rapidapi-key': '971259495emshbe9e527309b4dc4p1f01eejsn1dd736c66ac5',
             'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com'
         }
     };
