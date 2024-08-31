@@ -18,11 +18,10 @@ async function getUserData(userName) {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '971259495emshbe9e527309b4dc4p1f01eejsn1dd736c66ac5',
+            'x-rapidapi-key': 'ce3ec604e9msh27e04273b8c670cp1e86c8jsna3ac6ca885f8',
             'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com'
         }
     };
-
     const infoUrl = `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${userName}&include_about=true&url_embed_safe=true`;
     const storiesUrl =`https://instagram-scraper-api2.p.rapidapi.com/v1/stories?username_or_id_or_url=${userName}&url_embed_safe=true`;
     
@@ -44,7 +43,6 @@ async function getUserData(userName) {
         let following_count = infoData.following_count;
         let is_private = infoData.is_private;
         let pfpLink = infoData.profile_pic_url;
-        console.log(full_name, bio_text, joined_date, posts_count, followers_count, following_count, is_private, pfpLink);
         userContainer.style.display = "flex";
         storiesContainer.style.display = "block";
         placeHolder.textContent = '';
@@ -97,3 +95,4 @@ button.addEventListener("click", () => {
     }
     getUserData(userName);
 });
+
